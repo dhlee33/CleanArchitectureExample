@@ -35,7 +35,7 @@ enum Resource<T> {
 - Usage
 ```swift
 return gitHubSearchUseCase.search(query: query, page: page)
-    .flatMap { [weak self] resource -> Observable<Mutation> in
+    .map { [weak self] resource in
         switch resource {
         case let .Success(data):
         ...

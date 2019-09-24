@@ -85,21 +85,21 @@ final class GitHubSearchViewReactor: Reactor {
             return .just(.setRepos([], nextPage: nil))
         }
         return gitHubSearchUseCase.search(query: query, page: page)
-            .flatMap { [weak self] resource -> Observable<Mutation> in
+            .map { [weak self] resource in
                 switch resource {
                 case let .Success(data):
                     let nextPage: Int? = data.items.isEmpty ? nil: page + 1
                     if loadMore {
-                        return .just(.appendRepos(data.items, nextPage: nextPage))
+                        return .appendRepos(data.items, nextPage: nextPage)
                     } else {
                         self?.totalCount.accept(data.totalCount)
-                        return .just(.setRepos(data.items, nextPage: nextPage))
+                        return .setRepos(data.items, nextPage: nextPage)
                     }
                 case .Loading:
-                    return .just(.setLoading(true))
+                    return .setLoading(true)
                 case .Failure:
                     self?.error.accept("Error occurred")
-                    return .just(.setLoading(false))
+                    return .setLoading(false)
                 }
         }
     }
