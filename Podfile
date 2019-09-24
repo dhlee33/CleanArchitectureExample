@@ -9,6 +9,8 @@ target 'CleanArchitectureExample' do
   pod 'RxSwift'
   pod 'SnapKit'
   pod 'Alamofire'
+  pod 'Swinject'
+  pod 'SwinjectAutoregistration'
   # Pods for CleanArchitectureExample
 
 end

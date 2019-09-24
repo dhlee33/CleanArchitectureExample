@@ -8,12 +8,17 @@
 
 import RxSwift
 
-protocol WebApi {
+protocol WebApi: class {
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>>
 }
 
-struct DefaultWebApi: WebApi {
+final class DefaultWebApi: WebApi {
     let network: Network
+    
+    init(network: Network) {
+        self.network = network
+    }
+    
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>> {
         return network.get("https://api.github.com/search/repositories?q=\(query)&page=\(page)", responseType: GitHubSearch.self)
     }

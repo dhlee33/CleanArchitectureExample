@@ -14,6 +14,7 @@ class GitHubSearchViewController: UIViewController, StoryboardView {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var labelNoResult: UILabel!
+    typealias Reactor = GitHubSearchViewReactor
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -24,7 +25,7 @@ class GitHubSearchViewController: UIViewController, StoryboardView {
         tableView.scrollIndicatorInsets.top = tableView.contentInset.top
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
-        reactor = GitHubSearchViewReactor()
+        reactor = DefaultContainer.shared.resolve(Reactor.self)
 
         activityIndicator.hidesWhenStopped = true
     }

@@ -12,8 +12,13 @@ protocol GitHubSearchUseCase {
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>>
 }
 
-struct DefaultGitHubSearchUseCase: GitHubSearchUseCase {
+final class DefaultGitHubSearchUseCase: GitHubSearchUseCase {
     let webApi: WebApi
+    
+    init(webApi: WebApi) {
+        self.webApi = webApi
+    }
+    
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>> {
         return webApi.search(query: query, page: page)
     }

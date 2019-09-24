@@ -8,6 +8,9 @@ PODS:
   - RxSwift (4.4.1):
     - RxAtomic (~> 4.4)
   - SnapKit (4.2.0)
+  - Swinject (2.5.0)
+  - SwinjectAutoregistration (2.5.1):
+    - Swinject (~> 2.5)
 
 DEPENDENCIES:
   - Alamofire
@@ -15,6 +18,8 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SnapKit
+  - Swinject
+  - SwinjectAutoregistration
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -24,6 +29,8 @@ SPEC REPOS:
     - RxCocoa
     - RxSwift
     - SnapKit
+    - Swinject
+    - SwinjectAutoregistration
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
@@ -32,7 +39,9 @@ SPEC CHECKSUMS:
   RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
+  SwinjectAutoregistration: f72bf894cbd2ee4a9153e00fa5208e93fb44d283
 
-PODFILE CHECKSUM: 21ed43d11f5f0a4fe2df34fd196bc99ea3658aab
+PODFILE CHECKSUM: 775c3df2883ca26a676333766912f67c8785db6b
 
 COCOAPODS: 1.5.3

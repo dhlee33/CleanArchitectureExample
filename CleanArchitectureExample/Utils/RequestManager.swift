@@ -29,7 +29,7 @@ extension Network { // implement func with default value
     }
 }
 
-struct DefaultNetwork: Network {
+final class DefaultNetwork: Network {
     // TODO: Replace RequestManager singleton with RxAlamofire
     private func request<T: Codable>(_ path: String, method: HTTPMethod, parameters: Parameters?, responseType: T.Type) -> Observable<Resource<T>> {
         return Observable.create { observer in

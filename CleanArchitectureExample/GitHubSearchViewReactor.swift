@@ -16,9 +16,8 @@ final class GitHubSearchViewReactor: Reactor {
     var totalCount = PublishRelay<Int>()
     var error = PublishRelay<String>()
     
-    init() {
-        let provider: UseCaseProvider = DefaultUseCaseProvider()
-        gitHubSearchUseCase = provider.getGitHubSearchUseCase()
+    init(gitHubSearchUseCase: GitHubSearchUseCase) {
+        self.gitHubSearchUseCase = gitHubSearchUseCase
     }
 
     enum Action {

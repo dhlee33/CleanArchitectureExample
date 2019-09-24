@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CleanArchitectureExample/GitHubSearchViewController.swift"
-            timestampString = "591019675.73276"
+            timestampString = "591059047.501678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "bind(reactor:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CleanArchitectureExample/GitHubSearchViewReactor.swift"
-            timestampString = "591019675.7328269"
+            timestampString = "591059047.502395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "mutate(action:)"
             landmarkType = "7">
          </BreakpointContent>
