@@ -48,7 +48,7 @@ return gitHubSearchUseCase.search(query: query, page: page)
 ```
 
 ### Services
-- Service layer can contain web api, worker, cache ...
+- Service layer can be web api, worker, cache ...
 ```swift
 protocol WebApi {
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>>
