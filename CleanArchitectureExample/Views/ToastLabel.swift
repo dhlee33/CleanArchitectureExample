@@ -20,7 +20,6 @@ final class ToastLabel: UILabel, View {
         self.backgroundColor = backgroundColor
         self.textColor = .white
         self.textAlignment = .center
-        self.layer.cornerRadius = 1
         self.alpha = 0
         self.clipsToBounds = true
     }
