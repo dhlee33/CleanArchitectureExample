@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="k3z-lo-STc" detailTextLabel="L3m-0x-gyw" style="IBUITableViewCellStyleValue1" id="GaO-GP-ovA">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GitHubSearchCell" textLabel="k3z-lo-STc" detailTextLabel="L3m-0x-gyw" style="IBUITableViewCellStyleValue1" id="GaO-GP-ovA" customClass="GitHubSearchCell" customModule="CleanArchitectureExample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GaO-GP-ovA" id="kAe-a5-utZ">

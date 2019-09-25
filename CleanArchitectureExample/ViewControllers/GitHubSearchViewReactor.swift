@@ -13,12 +13,12 @@ import RxSwift
 final class GitHubSearchViewReactor: Reactor {
     let gitHubSearchUseCase: GitHubSearchUseCase
     
-    var totalCount = PublishRelay<Int>()
-    var error = PublishRelay<String>()
-    
     init(gitHubSearchUseCase: GitHubSearchUseCase) {
         self.gitHubSearchUseCase = gitHubSearchUseCase
     }
+    
+    let error = PublishRelay<String>()
+    let totalCount = PublishRelay<Int>()
 
     enum Action {
         case updateQuery(String?)
@@ -27,19 +27,37 @@ final class GitHubSearchViewReactor: Reactor {
     
     enum Mutation {
         case setQuery(String?)
-        case setRepos([GitHubSearchItem], nextPage: Int?)
+        case setRepos([GitHubSearchItem], totalCount: Int?, nextPage: Int?)
         case appendRepos([GitHubSearchItem], nextPage: Int?)
         case setLoading(Bool)
+        case setError(String?)
     }
     
     struct State {
         var query: String?
         var repos: [GitHubSearchItem] = []
         var nextPage: Int?
-        var isLoading: Bool = false
+        var loadingQueue: Int = 0
+        var totalCount: Int?
+        var error: String?
+        var isLoading: Bool {
+            return loadingQueue > 0
+        }
     }
     
     let initialState = State()
+    
+    func transform(state: Observable<State>) -> Observable<State> {
+        return state.do(onNext: { [weak self] state in
+            guard !state.isLoading else { return }
+            if let error = state.error {
+                self?.error.accept(error)
+            }
+            if let totalCount = state.totalCount {
+                self?.totalCount.accept(totalCount)
+            }
+        })
+    }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
@@ -53,53 +71,64 @@ final class GitHubSearchViewReactor: Reactor {
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
+        var newState = state
+        newState.error = nil
         switch mutation {
         case let .setQuery(query):
-            var newState = state
             newState.query = query
-            return newState
+            newState.totalCount = nil
             
-        case let .setRepos(repos, nextPage):
-            var newState = state
-            newState.isLoading = false
+        case let .setRepos(repos, totalCount, nextPage):
             newState.repos = repos
             newState.nextPage = nextPage
-            return newState
+            newState.totalCount = totalCount
             
         case let .appendRepos(repos, nextPage):
-            var newState = state
-            newState.isLoading = false
             newState.repos.append(contentsOf: repos)
             newState.nextPage = nextPage
-            return newState
             
-        case let .setLoading(isLoadingNextPage):
-            var newState = state
-            newState.isLoading = isLoadingNextPage
-            return newState
+        case let .setLoading(isLoading):
+            if isLoading {
+                newState.loadingQueue += 1
+            } else {
+                newState.loadingQueue -= 1
+            }
+            newState.loadingQueue = max(0, newState.loadingQueue)
+            newState.totalCount = nil
+            
+        case let .setError(error):
+            newState.error = error
         }
+        return newState
     }
     
     private func search(query: String?, page: Int, loadMore: Bool) -> Observable<Mutation> {
         guard let query = query, !query.isEmpty else {
-            return .just(.setRepos([], nextPage: nil))
+            return .just(.setRepos([], totalCount: nil, nextPage: nil))
         }
         return gitHubSearchUseCase.search(query: query, page: page)
-            .map { [weak self] resource in
+            .flatMap { resource -> Observable<Mutation> in
                 switch resource {
                 case let .Success(data):
                     let nextPage: Int? = data.items.isEmpty ? nil: page + 1
                     if loadMore {
-                        return .appendRepos(data.items, nextPage: nextPage)
+                        return .concat([
+                            .just(.setLoading(false)),
+                            .just(.appendRepos(data.items, nextPage: nextPage))
+                            ])
                     } else {
-                        self?.totalCount.accept(data.totalCount)
-                        return .setRepos(data.items, nextPage: nextPage)
+                        return .concat([
+                            .just(.setLoading(false)),
+                            .just(.setRepos(data.items, totalCount: data.totalCount, nextPage: nextPage))
+                            ])
                     }
                 case .Loading:
-                    return .setLoading(true)
+                    return .just(.setLoading(true))
                 case .Failure:
-                    self?.error.accept("Error occurred")
-                    return .setLoading(false)
+                    return .concat([
+                        .just(.setLoading(false)),
+                        .just(.setError("Error Occurred"))
+                        ])
                 }
         }
     }

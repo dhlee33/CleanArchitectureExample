@@ -13,10 +13,14 @@
 		6468C06622FFD90A00577E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6468C06422FFD90A00577E66 /* LaunchScreen.storyboard */; };
 		6483B364233ACEF20021E981 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6483B363233ACEF20021E981 /* README.md */; };
 		6483B366233ACFBF0021E981 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B365233ACFBF0021E981 /* Container.swift */; };
+		6483B36A233B965E0021E981 /* GitHubSearchCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B369233B965E0021E981 /* GitHubSearchCellReactor.swift */; };
+		6483B36C233B97560021E981 /* GitHubSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B36B233B97560021E981 /* GitHubSearchCell.swift */; };
+		6483B36E233BA0F40021E981 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B36D233BA0F40021E981 /* BaseViewController.swift */; };
+		6483B370233BA11E0021E981 /* ToastLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B36F233BA11E0021E981 /* ToastLabel.swift */; };
+		6483B372233BA12A0021E981 /* ToastLabelReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B371233BA12A0021E981 /* ToastLabelReactor.swift */; };
 		64CDD8622326967D00D1D526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64CDD8612326967D00D1D526 /* Main.storyboard */; };
 		64CDD864232696E000D1D526 /* GitHubSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDD863232696E000D1D526 /* GitHubSearchViewController.swift */; };
 		64CDD8662326978700D1D526 /* GitHubSearchViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CDD8652326978700D1D526 /* GitHubSearchViewReactor.swift */; };
-		64D4C0D6233A306B000191A8 /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4C0D5233A306B000191A8 /* UIViewController+extension.swift */; };
 		64E4FFDC2335CDF600F0DEC8 /* WebApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E4FFDB2335CDF600F0DEC8 /* WebApi.swift */; };
 		64E4FFDF2335CEB700F0DEC8 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E4FFDE2335CEB700F0DEC8 /* RequestManager.swift */; };
 		64E4FFE22335D59300F0DEC8 /* GitHubSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E4FFE12335D59300F0DEC8 /* GitHubSearchItem.swift */; };
@@ -35,10 +39,14 @@
 		6468C06722FFD90A00577E66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6483B363233ACEF20021E981 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6483B365233ACFBF0021E981 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		6483B369233B965E0021E981 /* GitHubSearchCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchCellReactor.swift; sourceTree = "<group>"; };
+		6483B36B233B97560021E981 /* GitHubSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchCell.swift; sourceTree = "<group>"; };
+		6483B36D233BA0F40021E981 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		6483B36F233BA11E0021E981 /* ToastLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastLabel.swift; sourceTree = "<group>"; };
+		6483B371233BA12A0021E981 /* ToastLabelReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastLabelReactor.swift; sourceTree = "<group>"; };
 		64CDD8612326967D00D1D526 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		64CDD863232696E000D1D526 /* GitHubSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchViewController.swift; sourceTree = "<group>"; };
 		64CDD8652326978700D1D526 /* GitHubSearchViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchViewReactor.swift; sourceTree = "<group>"; };
-		64D4C0D5233A306B000191A8 /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		64E4FFDB2335CDF600F0DEC8 /* WebApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApi.swift; sourceTree = "<group>"; };
 		64E4FFDE2335CEB700F0DEC8 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		64E4FFE12335D59300F0DEC8 /* GitHubSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchItem.swift; sourceTree = "<group>"; };
@@ -82,6 +90,8 @@
 		6468C05822FFD90800577E66 /* CleanArchitectureExample */ = {
 			isa = PBXGroup;
 			children = (
+				6483B368233B96480021E981 /* Views */,
+				6483B367233B96300021E981 /* ViewControllers */,
 				64E4FFE72335E1E800F0DEC8 /* UseCases */,
 				64E4FFE02335D56700F0DEC8 /* Models */,
 				64E4FFDD2335CEAB00F0DEC8 /* Utils */,
@@ -92,10 +102,29 @@
 				6468C06422FFD90A00577E66 /* LaunchScreen.storyboard */,
 				6468C06722FFD90A00577E66 /* Info.plist */,
 				64CDD8612326967D00D1D526 /* Main.storyboard */,
-				64CDD863232696E000D1D526 /* GitHubSearchViewController.swift */,
-				64CDD8652326978700D1D526 /* GitHubSearchViewReactor.swift */,
 			);
 			path = CleanArchitectureExample;
+			sourceTree = "<group>";
+		};
+		6483B367233B96300021E981 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				64CDD863232696E000D1D526 /* GitHubSearchViewController.swift */,
+				64CDD8652326978700D1D526 /* GitHubSearchViewReactor.swift */,
+				6483B36D233BA0F40021E981 /* BaseViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6483B368233B96480021E981 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6483B369233B965E0021E981 /* GitHubSearchCellReactor.swift */,
+				6483B36B233B97560021E981 /* GitHubSearchCell.swift */,
+				6483B36F233BA11E0021E981 /* ToastLabel.swift */,
+				6483B371233BA12A0021E981 /* ToastLabelReactor.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		64E4FFDA2335CDE200F0DEC8 /* Services */ = {
@@ -111,7 +140,6 @@
 			children = (
 				6483B365233ACFBF0021E981 /* Container.swift */,
 				64E4FFDE2335CEB700F0DEC8 /* RequestManager.swift */,
-				64D4C0D5233A306B000191A8 /* UIViewController+extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -230,9 +258,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitectureExample/Pods-CleanArchitectureExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
@@ -243,9 +273,11 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactorKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
@@ -285,12 +317,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6483B36C233B97560021E981 /* GitHubSearchCell.swift in Sources */,
 				6468C05E22FFD90800577E66 /* SecondViewController.swift in Sources */,
 				6483B366233ACFBF0021E981 /* Container.swift in Sources */,
 				6468C05A22FFD90800577E66 /* AppDelegate.swift in Sources */,
+				6483B370233BA11E0021E981 /* ToastLabel.swift in Sources */,
 				64E4FFE62335E13C00F0DEC8 /* GitHubSearchUseCase.swift in Sources */,
-				64D4C0D6233A306B000191A8 /* UIViewController+extension.swift in Sources */,
+				6483B36E233BA0F40021E981 /* BaseViewController.swift in Sources */,
+				6483B372233BA12A0021E981 /* ToastLabelReactor.swift in Sources */,
 				64E4FFE42335DF6200F0DEC8 /* GitHubSearch.swift in Sources */,
+				6483B36A233B965E0021E981 /* GitHubSearchCellReactor.swift in Sources */,
 				64CDD864232696E000D1D526 /* GitHubSearchViewController.swift in Sources */,
 				64CDD8662326978700D1D526 /* GitHubSearchViewReactor.swift in Sources */,
 				64E4FFDF2335CEB700F0DEC8 /* RequestManager.swift in Sources */,

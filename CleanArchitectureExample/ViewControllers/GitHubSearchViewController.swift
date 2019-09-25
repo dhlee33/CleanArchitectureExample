@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import SafariServices
 
-class GitHubSearchViewController: UIViewController, StoryboardView {
+class GitHubSearchViewController: BaseViewController, StoryboardView {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var labelNoResult: UILabel!
@@ -48,18 +48,14 @@ class GitHubSearchViewController: UIViewController, StoryboardView {
             .disposed(by: disposeBag)
         
         reactor.state.map { $0.repos }
-            .do(onNext: { [weak self] repose in
-                self?.tableView.isHidden = repose.isEmpty
+            .do(onNext: { [weak self] repos in
+                self?.tableView.isHidden = repos.isEmpty
             })
-            .bind(to: tableView.rx.items(cellIdentifier: "cell")) { indexPath, repo, cell in
-                cell.textLabel?.text = repo.fullName
-                switch repo.star {
-                case 1000..<10000:
-                    cell.detailTextLabel?.text = "✰"
-                case 10000...:
-                    cell.detailTextLabel?.text = "✰✰"
-                default: break
-                }
+            .bind(to: tableView.rx.items) { tableView, Int, item in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GitHubSearchCell") as! GitHubSearchCell
+                let reactor = GitHubSearchCellReactor(item: item)
+                cell.reactor = reactor
+                return cell
             }
             .disposed(by: disposeBag)
         
@@ -69,15 +65,15 @@ class GitHubSearchViewController: UIViewController, StoryboardView {
             .bind(to: activityIndicator.rx.isAnimating)
         .disposed(by: disposeBag)
         
-        reactor.error.throttle(1, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] error in
-            self?.showErrorToast(message: error)
-        }).disposed(by: disposeBag)
+        reactor.error
+            .map { ToastLabelReactor.Action.showToast($0) }
+            .bind(to: errorToast.reactor!.action)
+            .disposed(by: disposeBag)
         
-        reactor.totalCount.throttle(1, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] count in
-            self?.showToast(message: "Total Count: \(count)")
-        }).disposed(by: disposeBag)
+        reactor.totalCount
+            .map { ToastLabelReactor.Action.showToast("Total Count: \($0)") }
+            .bind(to: infoToast.reactor!.action)
+            .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
