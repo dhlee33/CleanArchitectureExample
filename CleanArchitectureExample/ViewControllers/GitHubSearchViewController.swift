@@ -79,8 +79,7 @@ class GitHubSearchViewController: BaseViewController, StoryboardView {
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
                 self.view.endEditing(true)
-                self.tableView.deselectRow(at: indexPath, animated: false)
-                let repo = reactor.currentState.repos[indexPath.row]
+                let repo = reactor.currentState.repos[indexPath.row].fullName
                 guard let url = URL(string: "https://github.com/\(repo)") else { return }
                 let viewController = SFSafariViewController(url: url)
                 self.searchController.present(viewController, animated: true, completion: nil)
