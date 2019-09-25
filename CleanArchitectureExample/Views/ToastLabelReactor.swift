@@ -12,29 +12,34 @@ import RxSwift
 class ToastLabelReactor: Reactor {
     struct State {
         var text: String?
+        var backgroundColor = UIColor.black
     }
     let initialState = State()
     
     enum Action {
-        case showToast(String)
+        case info(String)
+        case error(String)
     }
     
     enum Mutation {
-        case setText(String)
+        case setText(String, backgroundColor: UIColor)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case let .showToast(text):
-            return .just(.setText(text))
+        case let .info(text):
+            return .just(.setText(text, backgroundColor: .black))
+        case let .error(text):
+            return .just(.setText(text, backgroundColor: .red))
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var newState = state
         switch mutation {
-        case let .setText(text):
+        case let .setText(text, backgroundColor):
             newState.text = text
+            newState.backgroundColor = backgroundColor
         }
         return newState
     }

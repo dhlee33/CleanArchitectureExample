@@ -9,16 +9,10 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    let infoToast: ToastLabel = {
+    let toastLabel: ToastLabel = {
         let label = ToastLabel()
         let reactor = ToastLabelReactor()
-        label.configure(reactor: reactor, backgroundColor: .black)
-        return label
-    }()
-    let errorToast: ToastLabel = {
-        let label = ToastLabel()
-        let reactor = ToastLabelReactor()
-        label.configure(reactor: reactor, backgroundColor: .red)
+        label.configure(reactor: reactor)
         return label
     }()
     
@@ -28,9 +22,7 @@ class BaseViewController: UIViewController {
     }
     
     func configure() {
-        infoToast.frame = CGRect(x: 40, y: self.view.frame.size.height - 100, width: self.view.frame.size.width - 80, height: 35)
-        errorToast.frame = CGRect(x: 40, y: self.view.frame.size.height - 100, width: self.view.frame.size.width - 80, height: 35)
-        self.view.addSubview(infoToast)
-        self.view.addSubview(errorToast)
+        toastLabel.frame = CGRect(x: 40, y: self.view.frame.size.height - 100, width: self.view.frame.size.width - 80, height: 35)
+        self.view.addSubview(toastLabel)
     }
 }

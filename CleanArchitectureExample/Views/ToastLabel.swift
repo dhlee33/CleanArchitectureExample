@@ -16,9 +16,8 @@ final class ToastLabel: UILabel, View {
     
     typealias Reactor = ToastLabelReactor
     
-    func configure(reactor: ToastLabelReactor, backgroundColor: UIColor) {
+    func configure(reactor: ToastLabelReactor) {
         self.reactor = reactor
-        self.backgroundColor = backgroundColor
         self.textColor = .white
         self.textAlignment = .center
         self.alpha = 0
@@ -29,6 +28,7 @@ final class ToastLabel: UILabel, View {
         reactor.state.map { $0.text }
             .subscribe(onNext: { [weak self] text in
                 guard let self = self, let text = text, !text.isEmpty else { return }
+                self.backgroundColor = reactor.currentState.backgroundColor
                 self.text = text
                 self.alpha = 1
                 UIView.animate(withDuration: 0.5, delay: 1.5, options: .curveEaseOut, animations: {
@@ -39,9 +39,15 @@ final class ToastLabel: UILabel, View {
 }
 
 extension Reactive where Base: ToastLabel {
-    var toast: Binder<String> {
+    var info: Binder<String> {
         return Binder(self.base) { label, string in
-            label.reactor?.action.onNext(.showToast(string))
+            label.reactor?.action.onNext(.info(string))
+        }
+    }
+
+    var error: Binder<String> {
+        return Binder(self.base) { label, string in
+            label.reactor?.action.onNext(.error(string))
         }
     }
 }
