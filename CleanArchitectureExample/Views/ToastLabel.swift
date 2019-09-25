@@ -9,6 +9,7 @@
 import UIKit
 import ReactorKit
 import RxSwift
+import RxCocoa
 
 final class ToastLabel: UILabel, View {
     var disposeBag = DisposeBag()
@@ -34,5 +35,13 @@ final class ToastLabel: UILabel, View {
                     self.alpha = 0
                 })
             }).disposed(by: disposeBag)
+    }
+}
+
+extension Reactive where Base: ToastLabel {
+    var toast: Binder<String> {
+        return Binder(self.base) { label, string in
+            label.reactor?.action.onNext(.showToast(string))
+        }
     }
 }

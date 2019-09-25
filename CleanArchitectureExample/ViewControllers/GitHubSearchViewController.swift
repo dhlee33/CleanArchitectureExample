@@ -66,13 +66,12 @@ class GitHubSearchViewController: BaseViewController, StoryboardView {
         .disposed(by: disposeBag)
         
         reactor.error
-            .map { ToastLabelReactor.Action.showToast($0) }
-            .bind(to: errorToast.reactor!.action)
+            .bind(to: errorToast.rx.toast)
             .disposed(by: disposeBag)
         
         reactor.totalCount
-            .map { ToastLabelReactor.Action.showToast("Total Count: \($0)") }
-            .bind(to: infoToast.reactor!.action)
+            .map { "Total Count: \($0)" }
+            .bind(to: infoToast.rx.toast)
             .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
