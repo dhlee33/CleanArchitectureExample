@@ -11,6 +11,7 @@ target 'CleanArchitectureExample' do
   pod 'Alamofire'
   pod 'Swinject'
   pod 'SwinjectAutoregistration'
+  pod 'RxFlow'
   # Pods for CleanArchitectureExample
 
 end

@@ -23,9 +23,8 @@ class GitHubSearchViewController: BaseViewController, StoryboardView {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.scrollIndicatorInsets.top = tableView.contentInset.top
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
-        reactor = DefaultContainer.shared.resolve(Reactor.self)
 
         activityIndicator.hidesWhenStopped = true
     }
@@ -75,13 +74,8 @@ class GitHubSearchViewController: BaseViewController, StoryboardView {
             .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                self.view.endEditing(true)
-                let repo = reactor.currentState.repos[indexPath.row].fullName
-                guard let url = URL(string: "https://github.com/\(repo)") else { return }
-                let viewController = SFSafariViewController(url: url)
-                self.searchController.present(viewController, animated: true, completion: nil)
+            .subscribe(onNext: { indexPath in
+                reactor.showDetail(index: indexPath.row)
             })
             .disposed(by: disposeBag)
     }

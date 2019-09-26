@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3u9-MV-POg">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3u9-MV-POg">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="E3W-S8-TEq">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CC1-lk-y3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="3u9-MV-POg" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2Za-VL-sqH">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -22,14 +21,13 @@
                         <segue destination="9rZ-8K-bgf" kind="relationship" relationship="rootViewController" id="gQA-ut-SKR"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CC1-lk-y3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="784" y="84"/>
         </scene>
         <!--GitHub Search-->
         <scene sceneID="c1m-mL-wrv">
             <objects>
-                <viewController id="9rZ-8K-bgf" customClass="GitHubSearchViewController" customModule="CleanArchitectureExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GitHubSearchViewController" id="9rZ-8K-bgf" customClass="GitHubSearchViewController" customModule="CleanArchitectureExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iuf-Dc-sh8"/>
                         <viewControllerLayoutGuide type="bottom" id="wz4-O1-6Jq"/>
@@ -52,7 +50,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GaO-GP-ovA" id="kAe-a5-utZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k3z-lo-STc">
@@ -88,7 +86,7 @@
                             <constraint firstItem="JOW-Af-TrV" firstAttribute="leading" secondItem="I8P-Vt-RTy" secondAttribute="leading" id="rVN-6U-jmc"/>
                             <constraint firstAttribute="trailing" secondItem="JOW-Af-TrV" secondAttribute="trailing" id="rkT-f1-Bml"/>
                             <constraint firstItem="iPp-pJ-PGH" firstAttribute="centerX" secondItem="I8P-Vt-RTy" secondAttribute="centerX" id="uCW-c8-Jc1"/>
-                            <constraint firstItem="wz4-O1-6Jq" firstAttribute="top" secondItem="JOW-Af-TrV" secondAttribute="bottom" id="z8G-tM-jqD"/>
+                            <constraint firstItem="w0k-0M-C8w" firstAttribute="bottom" secondItem="JOW-Af-TrV" secondAttribute="bottom" id="xWu-hI-s8a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w0k-0M-C8w"/>
                     </view>
@@ -102,6 +100,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c31-OX-NB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1676" y="83.208395802098963"/>
+        </scene>
+        <!--Git Hub Search Detail View Controller-->
+        <scene sceneID="sfm-RR-4WH">
+            <objects>
+                <viewController storyboardIdentifier="GitHubSearchDetailViewController" id="MxM-Ml-hkD" customClass="GitHubSearchDetailViewController" customModule="CleanArchitectureExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OdK-0w-reD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page Not Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nb0-Qr-vP3">
+                                <rect key="frame" x="90.5" y="427.5" width="233" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1y-cz-cvb">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Nb0-Qr-vP3" firstAttribute="centerY" secondItem="OdK-0w-reD" secondAttribute="centerY" id="EzO-mh-tbQ"/>
+                            <constraint firstItem="umM-vs-Yzb" firstAttribute="bottom" secondItem="Y1y-cz-cvb" secondAttribute="bottom" id="Hgk-rC-4da"/>
+                            <constraint firstItem="Y1y-cz-cvb" firstAttribute="leading" secondItem="umM-vs-Yzb" secondAttribute="leading" id="bsM-Ll-IiS"/>
+                            <constraint firstItem="Nb0-Qr-vP3" firstAttribute="centerX" secondItem="OdK-0w-reD" secondAttribute="centerX" id="cKE-zH-nHS"/>
+                            <constraint firstItem="Y1y-cz-cvb" firstAttribute="top" secondItem="umM-vs-Yzb" secondAttribute="top" id="p8c-xY-pLa"/>
+                            <constraint firstItem="umM-vs-Yzb" firstAttribute="trailing" secondItem="Y1y-cz-cvb" secondAttribute="trailing" id="rzB-5L-5f0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="umM-vs-Yzb"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="Y1y-cz-cvb" id="xNT-VP-Oka"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fSx-hG-Lav" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2652" y="84"/>
         </scene>
     </scenes>
 </document>

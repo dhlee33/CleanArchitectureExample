@@ -22,7 +22,7 @@ class BaseViewController: UIViewController {
     }
     
     func configure() {
-        toastLabel.frame = CGRect(x: 40, y: self.view.frame.size.height - 100, width: self.view.frame.size.width - 80, height: 35)
+        toastLabel.frame = CGRect(x: 40, y: 100, width: self.view.frame.size.width - 80, height: 35)
         self.view.addSubview(toastLabel)
     }
 }

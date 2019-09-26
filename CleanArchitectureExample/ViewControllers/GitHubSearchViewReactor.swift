@@ -9,8 +9,10 @@
 import ReactorKit
 import RxCocoa
 import RxSwift
+import RxFlow
 
-final class GitHubSearchViewReactor: Reactor {
+final class GitHubSearchViewReactor: Reactor, Stepper {
+    let steps = PublishRelay<Step>()
     let gitHubSearchUseCase: GitHubSearchUseCase
     
     init(gitHubSearchUseCase: GitHubSearchUseCase) {
@@ -131,6 +133,11 @@ final class GitHubSearchViewReactor: Reactor {
                         ])
                 }
         }
+    }
+    
+    func showDetail(index: Int) {
+        let fullName = currentState.repos[index].fullName
+        self.steps.accept(GitHubSearchStep.showDetail(fullName: fullName))
     }
 }
 
