@@ -13,12 +13,12 @@ import RxCocoa
 class GitHubSearchDetailViewReactor: Reactor {
     typealias Action = NoAction
     struct State {
-        var url: URL?
+        var url: URL
     }
     
     let initialState: State
     
-    init(fullName: String) {
-        self.initialState = State(url: URL(string: "https://github.com/\(fullName)"))
+    init(url: URL) {
+        self.initialState = State(url: url)
     }
 }

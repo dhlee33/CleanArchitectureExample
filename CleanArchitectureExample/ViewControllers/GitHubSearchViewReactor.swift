@@ -137,7 +137,11 @@ final class GitHubSearchViewReactor: Reactor, Stepper {
     
     func showDetail(index: Int) {
         let fullName = currentState.repos[index].fullName
-        self.steps.accept(GitHubSearchStep.showDetail(fullName: fullName))
+        guard let url = gitHubSearchUseCase.getRepoUrl(fullName: fullName) else {
+            error.accept("Invalid URL")
+            return
+        }
+        self.steps.accept(GitHubSearchStep.showDetail(url: url))
     }
 }
 

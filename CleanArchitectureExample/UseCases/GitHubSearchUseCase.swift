@@ -10,6 +10,7 @@ import RxSwift
 
 protocol GitHubSearchUseCase {
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>>
+    func getRepoUrl(fullName: String) -> URL?
 }
 
 final class DefaultGitHubSearchUseCase: GitHubSearchUseCase {
@@ -21,5 +22,9 @@ final class DefaultGitHubSearchUseCase: GitHubSearchUseCase {
     
     func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>> {
         return webApi.search(query: query, page: page)
+    }
+
+    func getRepoUrl(fullName: String) -> URL? {
+        return URL(string: "https://github.com/\(fullName)")
     }
 }

@@ -10,5 +10,5 @@ import RxFlow
 
 enum GitHubSearchStep: Step {
     case showSearchView
-    case showDetail(fullName: String)
+    case showDetail(url: URL)
 }

@@ -18,10 +18,6 @@ class GitHubSearchDetailViewController: BaseViewController, StoryboardView {
     typealias Reactor = GitHubSearchDetailViewReactor
     
     func bind(reactor: Reactor) {
-        if let url = reactor.currentState.url {
-            webView.load(URLRequest(url: url))
-        } else {
-            webView.isHidden = true
-        }
+        webView.load(URLRequest(url: reactor.currentState.url))
     }
 }

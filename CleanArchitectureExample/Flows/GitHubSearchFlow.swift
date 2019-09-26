@@ -23,8 +23,8 @@ class GitHubSearchFlow: Flow {
         switch step {
         case .showSearchView:
             return showSearchView()
-        case let .showDetail(fullName):
-            return showDetail(fullName)
+        case let .showDetail(url):
+            return showDetail(url)
         }
     }
     
@@ -39,9 +39,9 @@ class GitHubSearchFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: searchVC, withNextStepper: reactor))
     }
 
-    private func showDetail(_ fullName: String) -> FlowContributors {
+    private func showDetail(_ url: URL) -> FlowContributors {
         let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GitHubSearchDetailViewController") as! GitHubSearchDetailViewController
-        let reactor = GitHubSearchDetailViewReactor(fullName: fullName)
+        let reactor = GitHubSearchDetailViewReactor(url: url)
         detailVC.reactor = reactor
         rootViewController.pushViewController(detailVC, animated: true)
         return .none
