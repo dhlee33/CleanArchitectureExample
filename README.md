@@ -5,6 +5,7 @@ Clean Architecture GitHub Search Example
 ## Features
 - Using ReactorKit
 - Clean Architecture and DI with Swinject
+- Navigation with RxFlow
 
 ## Architecture
 - Uni-directional hierarchy
