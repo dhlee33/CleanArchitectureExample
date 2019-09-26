@@ -10,6 +10,7 @@ import UIKit
 import RxFlow
 import RxSwift
 import RxCocoa
+import Swinject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let disposeBag = DisposeBag()
     var window: UIWindow?
     var coordinator = FlowCoordinator()
+    
+    let container: Container = {
+        let container = Container()
+        container.autoregister(Network.self, initializer: DefaultNetwork.init)
+        container.autoregister(WebApi.self, initializer: DefaultWebApi.init)
+        container.autoregister(GitHubSearchUseCase.self, initializer: DefaultGitHubSearchUseCase.init)
+        container.autoregister(GitHubSearchViewReactor.self, initializer: GitHubSearchViewReactor.init)
+        return container
+    } ()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -31,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        let gitHubSearchFlow = GitHubSearchFlow()
+        let gitHubSearchFlow = GitHubSearchFlow(container: container)
 
         Flows.whenReady(flow1: gitHubSearchFlow) { root in
             window.rootViewController = root

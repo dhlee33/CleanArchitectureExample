@@ -16,7 +16,6 @@
 		6468C06322FFD90A00577E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6468C06222FFD90A00577E66 /* Assets.xcassets */; };
 		6468C06622FFD90A00577E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6468C06422FFD90A00577E66 /* LaunchScreen.storyboard */; };
 		6483B364233ACEF20021E981 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6483B363233ACEF20021E981 /* README.md */; };
-		6483B366233ACFBF0021E981 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B365233ACFBF0021E981 /* Container.swift */; };
 		6483B36A233B965E0021E981 /* GitHubSearchCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B369233B965E0021E981 /* GitHubSearchCellReactor.swift */; };
 		6483B36C233B97560021E981 /* GitHubSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B36B233B97560021E981 /* GitHubSearchCell.swift */; };
 		6483B36E233BA0F40021E981 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483B36D233BA0F40021E981 /* BaseViewController.swift */; };
@@ -46,7 +45,6 @@
 		6468C06522FFD90A00577E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6468C06722FFD90A00577E66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6483B363233ACEF20021E981 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		6483B365233ACFBF0021E981 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		6483B369233B965E0021E981 /* GitHubSearchCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchCellReactor.swift; sourceTree = "<group>"; };
 		6483B36B233B97560021E981 /* GitHubSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchCell.swift; sourceTree = "<group>"; };
 		6483B36D233BA0F40021E981 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 		64E4FFDD2335CEAB00F0DEC8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				6483B365233ACFBF0021E981 /* Container.swift */,
 				64E4FFDE2335CEB700F0DEC8 /* RequestManager.swift */,
 			);
 			path = Utils;
@@ -317,7 +314,6 @@
 				6483B36C233B97560021E981 /* GitHubSearchCell.swift in Sources */,
 				6468C05E22FFD90800577E66 /* SecondViewController.swift in Sources */,
 				317D0692233C49E3008398A1 /* GitHubSearchFlow.swift in Sources */,
-				6483B366233ACFBF0021E981 /* Container.swift in Sources */,
 				6468C05A22FFD90800577E66 /* AppDelegate.swift in Sources */,
 				6483B370233BA11E0021E981 /* ToastLabel.swift in Sources */,
 				64E4FFE62335E13C00F0DEC8 /* GitHubSearchUseCase.swift in Sources */,

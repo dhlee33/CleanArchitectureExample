@@ -7,8 +7,15 @@
 //
 
 import RxFlow
+import Swinject
 
 class GitHubSearchFlow: Flow {
+    let container: Container
+    
+    init(container: Container) {
+        self.container = container
+    }
+    
     var root: Presentable {
         return self.rootViewController
     }
@@ -31,7 +38,7 @@ class GitHubSearchFlow: Flow {
     private func showSearchView() -> FlowContributors {
         let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GitHubSearchViewController") as! GitHubSearchViewController
         rootViewController.pushViewController(searchVC, animated: true)
-        guard let reactor = DefaultContainer.shared.resolve(GitHubSearchViewReactor.self) else {
+        guard let reactor = container.resolve(GitHubSearchViewReactor.self) else {
             return .none
         }
         searchVC.reactor = reactor
