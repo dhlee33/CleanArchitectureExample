@@ -26,7 +26,7 @@ DEPENDENCIES:
   - SwinjectAutoregistration
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - ReactorKit
     - RxAtomic
@@ -50,4 +50,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b8da7fe41cc0469f101a21f7d4e2393e0125cc42
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.0

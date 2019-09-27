@@ -11,6 +11,7 @@ import RxFlow
 import RxSwift
 import RxCocoa
 import Swinject
+import SwinjectAutoregistration
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
