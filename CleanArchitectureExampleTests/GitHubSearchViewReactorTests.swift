@@ -31,7 +31,6 @@ class GitHubSearchViewReactorTests: XCTestCase {
         
         let observable: TestableObservable<GitHubSearchViewReactor.Action> = scheduler.createHotObservable([
           next(100, GitHubSearchViewReactor.Action.updateQuery("test")),
-          //throuttling 100
           next(300, GitHubSearchViewReactor.Action.loadNextPage),
           next(400, GitHubSearchViewReactor.Action.loadNextPage),
           completed(500)
