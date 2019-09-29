@@ -13,5 +13,11 @@ target 'CleanArchitectureExample' do
   pod 'SwinjectAutoregistration'
   pod 'RxFlow'
   # Pods for CleanArchitectureExample
+  
+
+  target 'CleanArchitectureExampleTests' do
+    inherit! :complete
+    pod 'RxTest'
+  end
 
 end
