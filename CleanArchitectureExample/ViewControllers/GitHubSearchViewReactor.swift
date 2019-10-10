@@ -18,13 +18,11 @@ final class GitHubSearchViewReactor: Reactor, Stepper {
     init(gitHubSearchUseCase: GitHubSearchUseCase) {
         self.gitHubSearchUseCase = gitHubSearchUseCase
     }
-    
-    let error = PublishRelay<String>()
-    let totalCount = PublishRelay<Int>()
 
     enum Action {
         case updateQuery(String?)
         case loadNextPage
+        case setError(String?)
     }
     
     enum Mutation {
@@ -49,20 +47,10 @@ final class GitHubSearchViewReactor: Reactor, Stepper {
     
     let initialState = State()
     
-    func transform(state: Observable<State>) -> Observable<State> {
-        return state.do(onNext: { [weak self] state in
-            guard !state.isLoading else { return }
-            if let error = state.error {
-                self?.error.accept(error)
-            }
-            if let totalCount = state.totalCount {
-                self?.totalCount.accept(totalCount)
-            }
-        })
-    }
-    
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
+        case let .setError(error):
+            return .just(.setError(error))
         case let .updateQuery(query):
             return Observable.concat([.just(.setQuery(query)), self.search(query: query, page: 1, loadMore: false)])
         case .loadNextPage:
@@ -99,6 +87,7 @@ final class GitHubSearchViewReactor: Reactor, Stepper {
             newState.totalCount = nil
             
         case let .setError(error):
+            newState.loadingQueue = max(0, newState.loadingQueue - 1)
             newState.error = error
         }
         return newState
@@ -108,37 +97,28 @@ final class GitHubSearchViewReactor: Reactor, Stepper {
         guard let query = query, !query.isEmpty else {
             return .just(.setRepos([], totalCount: nil, nextPage: nil))
         }
-        return gitHubSearchUseCase.search(query: query, page: page)
-            .flatMap { resource -> Observable<Mutation> in
-                switch resource {
-                case let .Success(data):
+        return Observable.concat([
+            .just(.setLoading(true)),
+            gitHubSearchUseCase.search(query: query, page: page)
+                .do(onError: { [weak self] error in
+                    self?.action.onNext(.setError(error.localizedDescription))
+                })
+                .asObservable()
+                .map { data in
                     let nextPage: Int? = data.items.isEmpty ? nil: page + 1
                     if loadMore {
-                        return .concat([
-                            .just(.setLoading(false)),
-                            .just(.appendRepos(data.items, nextPage: nextPage))
-                            ])
+                        return .appendRepos(data.items, nextPage: nextPage)
                     } else {
-                        return .concat([
-                            .just(.setLoading(false)),
-                            .just(.setRepos(data.items, totalCount: data.totalCount, nextPage: nextPage))
-                            ])
+                        return .setRepos(data.items, totalCount: data.totalCount, nextPage: nextPage)
                     }
-                case .Loading:
-                    return .just(.setLoading(true))
-                case .Failure:
-                    return .concat([
-                        .just(.setLoading(false)),
-                        .just(.setError("Error Occurred"))
-                        ])
-                }
-        }
+            },
+            .just(.setLoading(false)),
+        ])
     }
     
     func showDetail(index: Int) {
         let fullName = currentState.repos[index].fullName
         guard let url = gitHubSearchUseCase.getRepoUrl(fullName: fullName) else {
-            error.accept("Invalid URL")
             return
         }
         self.steps.accept(GitHubSearchStep.showDetail(url: url))

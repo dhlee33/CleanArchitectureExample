@@ -64,11 +64,11 @@ class GitHubSearchViewController: BaseViewController, StoryboardView {
             .bind(to: activityIndicator.rx.isAnimating)
         .disposed(by: disposeBag)
         
-        reactor.error
+        reactor.state.flatMapLatest { Observable.from(optional: $0.error) }
             .bind(to: toastLabel.rx.error)
             .disposed(by: disposeBag)
         
-        reactor.totalCount
+        reactor.state.flatMapLatest { Observable.from(optional: $0.totalCount) }
             .map { "Total Count: \($0)" }
             .bind(to: toastLabel.rx.info)
             .disposed(by: disposeBag)
