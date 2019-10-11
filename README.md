@@ -24,35 +24,11 @@ container.autoregister(WebApi.self, initializer: DefaultWebApi.init)
 DefaultContainer.shared.resolve(Reactor.self)
 ```
 
-### Resource
-- Declaration
-```swift
-enum Resource<T> {
-    case Loading
-    case Success(T)
-    case Failure
-}
-```
-- Usage
-```swift
-return gitHubSearchUseCase.search(query: query, page: page)
-    .map { [weak self] resource in
-        switch resource {
-        case let .Success(data):
-        ...
-        case .Loading:
-        ...
-        case .Failure:
-        ...
-        }
-    }
-```
-
 ### Services
 - Service layer can be web api, worker, cache ...
 ```swift
 protocol WebApi {
-    func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>>
+    func search(query: String, page: Int) -> Single<GitHubSearch>
     ...
 }
 ```
@@ -63,7 +39,7 @@ protocol WebApi {
 final class DefaultGitHubSearchUseCase: GitHubSearchUseCase {
     let webApi: WebApi
     ...
-    func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>> {
+    func search(query: String, page: Int) -> Single<GitHubSearch> {
         return webApi.search(query: query, page: page)
     }
 }

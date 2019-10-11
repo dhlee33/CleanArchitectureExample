@@ -9,7 +9,7 @@
 import RxSwift
 
 protocol WebApi: class {
-    func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>>
+    func search(query: String, page: Int) -> Single<GitHubSearch>
 }
 
 final class DefaultWebApi: WebApi {
@@ -19,7 +19,7 @@ final class DefaultWebApi: WebApi {
         self.network = network
     }
     
-    func search(query: String, page: Int) -> Observable<Resource<GitHubSearch>> {
+    func search(query: String, page: Int) -> Single<GitHubSearch> {
         return network.get("https://api.github.com/search/repositories?q=\(query)&page=\(page)", responseType: GitHubSearch.self)
     }
 }
