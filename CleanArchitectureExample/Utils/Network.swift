@@ -36,7 +36,7 @@ final class DefaultNetwork: Network {
                 single(.error(NetworkError.invalidPath))
                 return Disposables.create()
             }
-            let request = Alamofire.request(url, method: method)
+            let request = Alamofire.request(url, method: method, parameters: parameters)
                 .validate()
                 .responseJSON { response in
                     guard response.result.isSuccess, let data = response.data else {

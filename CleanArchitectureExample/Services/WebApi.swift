@@ -20,6 +20,7 @@ final class DefaultWebApi: WebApi {
     }
     
     func search(query: String, page: Int) -> Single<GitHubSearch> {
-        return network.get("https://api.github.com/search/repositories?q=\(query)&page=\(page)", responseType: GitHubSearch.self)
+        let parameters: [String: Any] = ["q": query, "page": page]
+        return network.get("https://api.github.com/search/repositories", parameters: parameters, responseType: GitHubSearch.self)
     }
 }

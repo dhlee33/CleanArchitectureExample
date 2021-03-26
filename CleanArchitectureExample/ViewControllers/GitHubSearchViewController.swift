@@ -8,7 +8,6 @@
 import ReactorKit
 import RxCocoa
 import RxSwift
-import SafariServices
 
 class GitHubSearchViewController: BaseViewController, StoryboardView {
     @IBOutlet weak var tableView: UITableView!
@@ -31,7 +30,7 @@ class GitHubSearchViewController: BaseViewController, StoryboardView {
     
     func bind(reactor: GitHubSearchViewReactor) {
         searchController.searchBar.rx.text
-            .debounce(1, scheduler: MainScheduler.instance)
+            .debounce(1, scheduler: MainScheduler.asyncInstance)
             .map { Reactor.Action.updateQuery($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
