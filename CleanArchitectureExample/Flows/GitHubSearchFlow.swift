@@ -10,7 +10,7 @@ import RxFlow
 import Swinject
 
 class GitHubSearchFlow: Flow {
-    let container: Container
+    private let container: Container
     
     init(container: Container) {
         self.container = container
@@ -20,10 +20,7 @@ class GitHubSearchFlow: Flow {
         return self.rootViewController
     }
 
-    private lazy var rootViewController: UINavigationController = {
-        let vc = UINavigationController()
-        return vc
-    }()
+    private let rootViewController = UINavigationController()
 
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? GitHubSearchStep else { return .none }
@@ -36,20 +33,21 @@ class GitHubSearchFlow: Flow {
     }
     
     private func showSearchView() -> FlowContributors {
-        let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GitHubSearchViewController") as! GitHubSearchViewController
-        rootViewController.pushViewController(searchVC, animated: true)
-        guard let reactor = container.resolve(GitHubSearchViewReactor.self) else {
+        guard let usecase = container.resolve(GitHubSearchUseCase.self) else {
             return .none
         }
-        searchVC.reactor = reactor
+        let reactor = GitHubSearchViewReactor(gitHubSearchUseCase: usecase)
+
+        let searchVC = GitHubSearchViewController(reactor: reactor)
+        rootViewController.pushViewController(searchVC, animated: true)
 
         return .one(flowContributor: .contribute(withNextPresentable: searchVC, withNextStepper: reactor))
     }
 
     private func showDetail(_ url: URL) -> FlowContributors {
-        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GitHubSearchDetailViewController") as! GitHubSearchDetailViewController
         let reactor = GitHubSearchDetailViewReactor(url: url)
-        detailVC.reactor = reactor
+        let detailVC = GitHubSearchDetailViewController(reactor: reactor)
+
         rootViewController.pushViewController(detailVC, animated: true)
         return .none
     }

@@ -15,38 +15,40 @@ import SwinjectAutoregistration
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    let disposeBag = DisposeBag()
+    private let coordinator = FlowCoordinator()
+    private var toastWindow: UIWindow?
     var window: UIWindow?
-    var coordinator = FlowCoordinator()
     
     let container: Container = {
         let container = Container()
-        container.autoregister(Network.self, initializer: DefaultNetwork.init)
-        container.autoregister(WebApi.self, initializer: DefaultWebApi.init)
+        container.autoregister(RequestManager.self, initializer: DefaultRequestManager.init)
         container.autoregister(GitHubSearchUseCase.self, initializer: DefaultGitHubSearchUseCase.init)
+        container.register(ToastManager.self, factory: { _ in ToastViewController.shared })
         container.autoregister(GitHubSearchViewReactor.self, initializer: GitHubSearchViewReactor.init)
         return container
     } ()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        guard let window = self.window else { return false }
 
-        self.coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
-            print ("will navigate to flow=\(flow) and step=\(step)")
-        }).disposed(by: self.disposeBag)
+        self.window = UIWindow().then {
+            $0.backgroundColor = .white
+        }
 
-        self.coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
-            print ("did navigate to flow=\(flow) and step=\(step)")
-        }).disposed(by: self.disposeBag)
+        self.toastWindow = UIWindow(frame: UIScreen.main.bounds).then {
+            $0.isUserInteractionEnabled = false
+
+            $0.backgroundColor = UIColor.clear
+            $0.windowLevel = .alert
+            $0.rootViewController = ToastViewController.shared
+            $0.isHidden = false
+        }
 
         let gitHubSearchFlow = GitHubSearchFlow(container: container)
 
-        Flows.whenReady(flow1: gitHubSearchFlow) { root in
-            window.rootViewController = root
-            window.makeKeyAndVisible()
+        Flows.whenReady(flow1: gitHubSearchFlow) { [window] root in
+            window?.rootViewController = root
+            window?.makeKeyAndVisible()
         }
 
         self.coordinator.coordinate(flow: gitHubSearchFlow, with: OneStepper(withSingleStep: GitHubSearchStep.showSearchView))
