@@ -10,9 +10,6 @@ PODS:
     - RxSwift (>= 4.4.0)
   - RxSwift (4.4.1):
     - RxAtomic (~> 4.4)
-  - RxTest (4.4.1):
-    - RxAtomic (~> 4.4)
-    - RxSwift (~> 4.0)
   - SnapKit (4.2.0)
   - Swinject (2.5.0)
   - SwinjectAutoregistration (2.5.1):
@@ -20,16 +17,15 @@ PODS:
   - Then (2.7.0)
 
 DEPENDENCIES:
-  - Alamofire
-  - ReactorKit
-  - RxCocoa
-  - RxFlow
-  - RxSwift
-  - RxTest
-  - SnapKit
-  - Swinject
-  - SwinjectAutoregistration
-  - Then
+  - Alamofire (~> 4.8.1)
+  - ReactorKit (~> 1.2.1)
+  - RxCocoa (~> 4.4.1)
+  - RxFlow (~> 2.0.0)
+  - RxSwift (~> 4.4.1)
+  - SnapKit (~> 4.2.0)
+  - Swinject (~> 2.5.0)
+  - SwinjectAutoregistration (~> 2.5.1)
+  - Then (~> 2.7.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -43,7 +39,6 @@ SPEC REPOS:
     - Swinject
     - SwinjectAutoregistration
   trunk:
-    - RxTest
     - Then
 
 SPEC CHECKSUMS:
@@ -53,12 +48,11 @@ SPEC CHECKSUMS:
   RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxFlow: f0212025e3747431b3be09c6be04bfde0a3bf5a4
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
-  RxTest: f8e548755ca3c7502dc41c7d3b28802c90115a38
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectAutoregistration: f72bf894cbd2ee4a9153e00fa5208e93fb44d283
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: c09e02a2b4bb9ff02ec7ff9cf37818a6b662c059
+PODFILE CHECKSUM: b32ee606dea1f8fa37a49f2a320240ad3adcba3b
 
 COCOAPODS: 1.9.3
