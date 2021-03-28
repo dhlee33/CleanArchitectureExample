@@ -9,18 +9,18 @@
 import RxSwift
 import Alamofire
 
-enum NetworkError: Error, LocalizedError {
+enum RequestManagerError: Error, LocalizedError {
     case invalidPath
-    case networkError
+    case failed
     case typeError
 }
 
-protocol Network {
+protocol RequestManager {
     func get<T: Codable>(_ path: String, parameters: [String: Any]?, responseType: T.Type) -> Single<T>
     func post<T: Codable>(_ path: String, parameters: [String: Any]?, responseType: T.Type) -> Single<T>
 }
 
-extension Network { // implement func with default value
+extension RequestManager {
     func get<T: Codable>(_ path: String, responseType: T.Type) -> Single<T> {
         return get(path, parameters: nil, responseType: T.self)
     }
@@ -29,18 +29,18 @@ extension Network { // implement func with default value
     }
 }
 
-final class DefaultNetwork: Network {
+final class DefaultRequestManager: RequestManager {
     private func request<T: Codable>(_ path: String, method: HTTPMethod, parameters: Parameters?, responseType: T.Type) -> Single<T> {
         return Single.create { single in
             guard let url = URL(string: path) else {
-                single(.error(NetworkError.invalidPath))
+                single(.error(RequestManagerError.invalidPath))
                 return Disposables.create()
             }
             let request = Alamofire.request(url, method: method, parameters: parameters)
                 .validate()
                 .responseJSON { response in
                     guard response.result.isSuccess, let data = response.data else {
-                        single(.error(NetworkError.networkError))
+                        single(.error(RequestManagerError.failed))
                         return
                     }
                     do {
@@ -48,15 +48,13 @@ final class DefaultNetwork: Network {
                         let value = try decoder.decode(T.self, from: data)
                         single(.success(value))
                     } catch {
-                        single(.error(NetworkError.typeError))
+                        single(.error(RequestManagerError.typeError))
                     }
                 }
             return Disposables.create {
                 request.cancel()
             }
         }
-        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .background))
-        .observeOn(MainScheduler.asyncInstance)
     }
     
     func get<T: Codable>(_ path: String, parameters: [String: Any]?, responseType: T.Type) -> Single<T> {

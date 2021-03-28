@@ -9,44 +9,44 @@ Clean Architecture GitHub Search Example
 
 ## Architecture
 - Uni-directional hierarchy
-- ViewController -> Reactor -> UseCases -> Services
+- ViewController -> Reactor -> UseCases -> Managers
 
 ### Container
 - Handle dependency injection using Swinject
 ```swift
 ...
-container.autoregister(Network.self, initializer: DefaultNetwork.init)
-container.autoregister(WebApi.self, initializer: DefaultWebApi.init)
+container.autoregister(RequestManager.self, initializer: DefaultRequestManager.init)
+container.autoregister(GitHubSearchUseCase.self, initializer: DefaultGitHubSearchUseCase.init)
 ...
 ```
 - Usage
 ```swift
-DefaultContainer.shared.resolve(Reactor.self)
+container.resolve(GitHubSearchUseCase.self)
 ```
 
-### Services
-- Service layer can be web api, worker, cache ...
+### Managers
+- Managers are responsible for specific services.
 ```swift
-protocol WebApi {
-    func search(query: String, page: Int) -> Single<GitHubSearch>
+protocol ToastManager {
+    func showToast(_ type: ToastType)
     ...
 }
 ```
 
 ### UseCases
-- UseCases handle usecases of entity(model) using service layer
+- UseCases handle usecases of entity using manager layer
 ```swift
 final class DefaultGitHubSearchUseCase: GitHubSearchUseCase {
-    let webApi: WebApi
+    private let requestManager: RequestManager
     ...
     func search(query: String, page: Int) -> Single<GitHubSearch> {
-        return webApi.search(query: query, page: page)
+        return requestManager.get(...)
     }
 }
 ```
 
 ### View and Reactor
-- Each viewControllers implements StoryboardView from reactorKit and has reactor
+- Each viewControllers implements View from reactorKit and has reactor
 - View gets resources from reactor and handles logics about controlling view
 - Reactor (kind of ViewModel) handles resources using useCases
 

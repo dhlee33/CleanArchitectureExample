@@ -17,6 +17,7 @@ PODS:
   - Swinject (2.5.0)
   - SwinjectAutoregistration (2.5.1):
     - Swinject (~> 2.5)
+  - Then (2.7.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - SnapKit
   - Swinject
   - SwinjectAutoregistration
+  - Then
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - SwinjectAutoregistration
   trunk:
     - RxTest
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
@@ -54,7 +57,8 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
   SwinjectAutoregistration: f72bf894cbd2ee4a9153e00fa5208e93fb44d283
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 1a76e72b9f70c5df0704323db5e5e4cf7beefb35
+PODFILE CHECKSUM: c09e02a2b4bb9ff02ec7ff9cf37818a6b662c059
 
 COCOAPODS: 1.9.3

@@ -10,6 +10,7 @@ import ReactorKit
 import RxSwift
 
 final class GitHubSearchCell: UITableViewCell, View {
+    static let reuseIdentifier = "GitHubSearchCell"
     var disposeBag = DisposeBag()
     
     typealias Reactor = GitHubSearchCellReactor

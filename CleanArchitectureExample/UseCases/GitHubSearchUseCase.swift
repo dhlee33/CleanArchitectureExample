@@ -14,14 +14,26 @@ protocol GitHubSearchUseCase {
 }
 
 final class DefaultGitHubSearchUseCase: GitHubSearchUseCase {
-    let webApi: WebApi
+    private let requestManager: RequestManager
+    private let toastManager: ToastManager
     
-    init(webApi: WebApi) {
-        self.webApi = webApi
+    init(
+        requestManager: RequestManager,
+        toastManager: ToastManager
+    ) {
+        self.toastManager = toastManager
+        self.requestManager = requestManager
     }
     
     func search(query: String, page: Int) -> Single<GitHubSearch> {
-        return webApi.search(query: query, page: page)
+        let parameters: [String: Any] = ["q": query, "page": page]
+        return requestManager.get("https://api.github.com/search/repositories", parameters: parameters, responseType: GitHubSearch.self)
+            .do(onSuccess: { [toastManager] data in
+                guard page == 1 else { return }
+                toastManager.showToast(.success("Total Count: \(data.totalCount)"))
+            }, onError: { [toastManager] _ in
+                toastManager.showToast(.generalError)
+            })
     }
 
     func getRepoUrl(fullName: String) -> URL? {
